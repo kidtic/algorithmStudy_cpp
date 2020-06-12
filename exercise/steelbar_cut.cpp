@@ -8,16 +8,27 @@
 #include <algorithm>
 #include <math.h>
 #include <limits.h>
+#include "input.h"
 
 
 using namespace std;
 
 class steelbar_cut
 {
-private:
-    /* data */
 public:
+    /* data */
+    arginput data;
+    steelbar_cut(){
+        data.read("data/steelbar_cut.json");
+    };
+public:
+    void Solution(){
+        int res=solution(data.data_int_arr1[0],data.data_int[0]);
+        cout<<"out:"<<endl;
+        cout<<res<<endl;
+    };
     int solution(vector<int> pri,int n){
+        //实现
         pri.push_back(0);
         vector<int> r(n + 1, INT_MIN);
         r[0] = 0;
@@ -39,11 +50,8 @@ int main(int argc, char const *argv[])
 {
     printf("hello world\n");
     steelbar_cut out;
-    vector<int> pricetab{ 0, 1, 5, 8, 9, 10, 17, 17, 20, 24, 30,34,36,39,48,50,66,71,72,73,77,77,79 };
-    for(int i=0;i<50;i++){
-        int res=out.solution(pricetab,13525206+i);
-        cout<<i<<":"<<res<<endl;
-    }
+
+    out.Solution();
     
     
     return 0;

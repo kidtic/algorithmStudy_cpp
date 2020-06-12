@@ -28,7 +28,7 @@ else()
    message(FATAL_ERROR "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
 endif()
 
-
+find_package(jsoncpp  REQUIRED)
 
 include_directories(
 ${PROJECT_SOURCE_DIR}
@@ -48,6 +48,19 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)
 # Build examples
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
 
+set(lib_DIR /usr/lib/x84_64-linux-gnu)
+link_directories(${lib_DIR})
+
+#钢条切割问题
 add_executable(steelbar_cut exercise/steelbar_cut.cpp)
-target_link_libraries(steelbar_cut )
+target_link_libraries(steelbar_cut libjsoncpp.a)
+#json数据测试
+add_executable(jsondata exercise/jsondata.cpp)
+target_link_libraries(jsondata libjsoncpp.a)
+#路径规划
+add_executable(pathplanning exercise/pathplanning.cpp)
+target_link_libraries(pathplanning libjsoncpp.a)
+
+
+
 

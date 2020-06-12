@@ -1,15 +1,15 @@
 #pragma once
 #include <iostream>
 
-//�������ݽṹ
+//基本数据结构
 
-//=---------------��ջ
+//=---------------堆栈
 template <class T>
-class Stack
+class myStack
 {
 public:
-	Stack(int maxsize);
-	~Stack();
+	myStack(int maxsize);
+	~myStack();
 	void push(T x);
 	T pop();
 	bool empty();
@@ -23,18 +23,17 @@ private:
 
 };
 
-template <class T> Stack<T>::Stack(int maxsize)
+template <class T> myStack<T>::myStack(int maxsize)
 {
 	pT = new T[maxsize];
 	m_maxsize = maxsize;
 	top = 0;
 }
-
-template <class T> Stack<T>::~Stack()
+template <class T> myStack<T>::~myStack()
 {
 	delete[] pT;
 }
-template <class T> void Stack<T>::push(T x)
+template <class T> void myStack<T>::push(T x)
 {
 	if (top >= m_maxsize)
 	{
@@ -44,7 +43,7 @@ template <class T> void Stack<T>::push(T x)
 	pT[top] = x;
 	top++;
 }
-template <class T> T Stack<T>::pop()
+template <class T> T myStack<T>::pop()
 {
 	if (top <= 0)
 	{
@@ -54,7 +53,7 @@ template <class T> T Stack<T>::pop()
 	top--;
 	return pT[top];
 }
-template <class T> bool Stack<T>::empty()
+template <class T> bool myStack<T>::empty()
 {
 	if (top == 0)
 		return true;
@@ -63,7 +62,7 @@ template <class T> bool Stack<T>::empty()
 		return false;
 	}
 }
-template <class T> T& Stack<T>::operator[](int index)
+template <class T> T& myStack<T>::operator[](int index)
 {
 	if (index >= top)
 	{
@@ -72,18 +71,18 @@ template <class T> T& Stack<T>::operator[](int index)
 	}
 	return pT[index];
 }
-template <class T> int Stack<T>::size()
+template <class T> int myStack<T>::size()
 {
 	return top;
 }
 
-//=---------------����
+//=--------------队列
 template<class T> 
-class Queue
+class myQueue
 {
 public:
-	Queue(int maxsize);
-	~Queue();
+	myQueue(int maxsize);
+	~myQueue();
 	bool empty();//�ж��Ƿ�Ϊ��
 	void enqueue(T x);//���
 	T dequeue();//����
@@ -101,18 +100,17 @@ private:
 
 };
 
-template<class T> Queue<T>::Queue(int maxsize)
+template<class T> myQueue<T>::myQueue(int maxsize)
 {
 	pT = new T[maxsize];
 	m_maxsize = maxsize;
 	head = 0; tail = 0;
 }
-
-template<class T> Queue<T>::~Queue()
+template<class T> myQueue<T>::~myQueue()
 {
 	delete[] pT;
 }
-template<class T> bool Queue<T>::empty()
+template<class T> bool myQueue<T>::empty()
 {
 	if (head == tail)
 		return true;
@@ -121,7 +119,7 @@ template<class T> bool Queue<T>::empty()
 		return false;
 	}
 }
-template<class T> void Queue<T>::enqueue(T x)
+template<class T> void myQueue<T>::enqueue(T x)
 {
 	//�ж϶����Ƿ���
 	if (size() == m_maxsize - 1)
@@ -140,7 +138,7 @@ template<class T> void Queue<T>::enqueue(T x)
 		tail++;
 	}
 }
-template<class T> T Queue<T>::dequeue()
+template<class T> T myQueue<T>::dequeue()
 {
 	//�ж��Ƿ�Ϊ��
 	if (empty())
@@ -160,7 +158,7 @@ template<class T> T Queue<T>::dequeue()
 	}
 	return x;
 }
-template<class T> int Queue<T>::size()
+template<class T> int myQueue<T>::size()
 {
 	int s = tail - head;
 	if (s >= 0)
@@ -172,7 +170,7 @@ template<class T> int Queue<T>::size()
 		return m_maxsize + s;
 	}
 }
-template <class T> T& Queue<T>::operator[](int index)
+template <class T> T& myQueue<T>::operator[](int index)
 {
 	//�ж��Ƿ񳬹�����
 	if (index >= size())
@@ -193,8 +191,7 @@ template <class T> T& Queue<T>::operator[](int index)
 
 
 
-//=---------------����
-//�����ڵ�
+//=---------------链表
 template<class T>
 struct linkNode
 {
@@ -242,7 +239,6 @@ template<class T> LinkList<T>::~LinkList()
 	}
 	delete head;
 }
-
 template<class T> bool LinkList<T>::empty()
 {
 	if (head == nullptr)
@@ -294,9 +290,6 @@ template<class T> void LinkList<T>::print()
 		p = p->next;
 	}
 }
-
-
-
 template<class T> bool LinkList<T>::insertNode(int index, T key, linkNode<T>* p)
 {
 	if (p==nullptr)

@@ -1,0 +1,13 @@
+{
+    "dataname":"test",
+    "arg":[
+        {
+            "type":"int",
+            "data":27
+        },
+        {
+            "type":"vector<string>",
+            "data":["1","f","3","f"]
+        }
+    ]
+}
