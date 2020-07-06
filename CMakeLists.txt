@@ -60,6 +60,9 @@ target_link_libraries(jsondata libjsoncpp.a)
 #路径规划
 add_executable(pathplanning exercise/pathplanning.cpp)
 target_link_libraries(pathplanning libjsoncpp.a)
+#排序
+add_executable(sort exercise/sort.cpp)
+target_link_libraries(sort libjsoncpp.a)
 
 
 
