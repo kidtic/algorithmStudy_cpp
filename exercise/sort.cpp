@@ -25,16 +25,17 @@ public:
         data.read("data/sort.json");
         cout<<"finish data load"<<endl;
     };
+    bool sortright(vector<int> arr){
+        for(int i=0;i<arr.size()-1;i++){
+            if(arr[i]>arr[i+1])return false;
+        }
+        return true;
+    }
 public:
     void Solution(){
         vector<int> nums1=data.data_int_arr1[0];
         vector<int> nums2=data.data_int_arr1[1];
 
-        vector<int> res1=maopaosort(nums1);
-        for(int e:res1){
-            cout<<e<<" ";
-        }
-        cout<<endl;
         
         
         
@@ -45,12 +46,14 @@ public:
         end = clock();
         double seconds  =(double)(end - start)/CLOCKS_PER_SEC;
         printf("归并排序 Use time is: %.3f ms\n", seconds*1000);
+        if(!sortright(res2))cout<<"排序错误"<<endl;
 
         start = clock();
         res2=maopaosort(nums2);
         end = clock();
         seconds  =(double)(end - start)/CLOCKS_PER_SEC;
         printf("冒泡排序 Use time is: %.3f ms\n", seconds*1000);
+        if(!sortright(res2))cout<<"排序错误"<<endl;
 
         res2=nums2;
         start = clock();
@@ -58,12 +61,29 @@ public:
         end = clock();
         seconds  =(double)(end - start)/CLOCKS_PER_SEC;
         printf("快速排序 Use time is: %.3f ms\n", seconds*1000);
+        if(!sortright(res2))cout<<"排序错误"<<endl;
 
         start = clock();
         res2=heapsort(nums2);
         end = clock();
         seconds  =(double)(end - start)/CLOCKS_PER_SEC;
         printf("堆排序 Use time is: %.3f ms\n", seconds*1000);
+        if(!sortright(res2))cout<<"排序错误"<<endl;
+
+        start = clock();
+        res2=shellsort(nums2);
+        end = clock();
+        seconds  =(double)(end - start)/CLOCKS_PER_SEC;
+        printf("希尔排序 Use time is: %.3f ms\n", seconds*1000);
+        if(!sortright(res2))cout<<"排序错误"<<endl;
+
+        start = clock();
+        res2=insertsort(nums2);
+        end = clock();
+        seconds  =(double)(end - start)/CLOCKS_PER_SEC;
+        printf("插入排序 Use time is: %.3f ms\n", seconds*1000);
+        if(!sortright(res2))cout<<"排序错误"<<endl;
+
         
 
 
@@ -74,6 +94,13 @@ public:
         end = clock();
         seconds  =(double)(end - start)/CLOCKS_PER_SEC;
         printf("函数库:快速排序 Use time is: %.3f ms\n", seconds*1000);
+
+        res2=nums2;
+        start = clock();
+        stable_sort(res2.begin(),res2.end());
+        end = clock();
+        seconds  =(double)(end - start)/CLOCKS_PER_SEC;
+        printf("函数库:稳定排序 Use time is: %.3f ms\n", seconds*1000);
 
         
         
@@ -88,6 +115,7 @@ public:
             vector<int> res;
             return res;
         }
+        
         if(left==right){
             vector<int> res;
             res.push_back(nums[left]);
@@ -197,6 +225,41 @@ public:
             heapify(arr,bigindex,len);
         }
     }
+    //希尔排序
+    vector<int> shellsort(vector<int> arr){
+        int gap=arr.size()/2;
+
+        while(gap>0){
+            for(int i=gap;i<arr.size();i++){
+                //取arr[i]这个值，往前插，只不过间隔是gap
+                //-gap就是前一个元素，+gap就是后一个元素
+                int tmp=arr[i];
+                int j=i-gap;
+                while(j>=0 && arr[j]>tmp){
+                    arr[j+gap]=arr[j];
+                    j-=gap;
+                }
+                arr[j+gap]=tmp;
+            }
+            gap=gap/2;
+        }
+
+        return arr;
+    }
+    //插入排序
+    vector<int> insertsort(vector<int> arr){
+        for(int i=1;i<arr.size();i++){
+            int tmp=arr[i];
+            int j=i-1;
+            while(j>=0 && arr[j]>tmp){
+                arr[j+1]=arr[j];
+                j--;
+            }
+            arr[j+1]=tmp;
+        }
+        return arr;
+    }
+
 };
 
 int main(int argc, char const *argv[])
