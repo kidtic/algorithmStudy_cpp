@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/kk/SynologyDrive/bigProject/algorithmStudy_cpp/exercise/jsondata.cpp
+jsoncpp/json/json.h
+-
+fstream
+-
+iostream
+-
+

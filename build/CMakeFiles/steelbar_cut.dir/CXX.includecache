@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../datastructure/include/input.h
+jsoncpp/json/json.h
+-
+fstream
+-
+iostream
+-
+vector
+-
+
+/home/kk/SynologyDrive/bigProject/algorithmStudy_cpp/exercise/steelbar_cut.cpp
+vector
+-
+stdio.h
+-
+iostream
+-
+algorithm
+-
+math.h
+-
+limits.h
+-
+input.h
+/home/kk/SynologyDrive/bigProject/algorithmStudy_cpp/exercise/input.h
+

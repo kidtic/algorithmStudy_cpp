@@ -1,0 +1,1 @@
+/usr/bin/c++    -Wall   -O3  -std=c++11 -O3 -DNDEBUG  -rdynamic CMakeFiles/sort.dir/exercise/sort.cpp.o  -o ../bin/sort   -L/usr/lib/x84_64-linux-gnu  -Wl,-rpath,/usr/lib/x84_64-linux-gnu -Wl,-Bstatic -ljsoncpp -Wl,-Bdynamic 

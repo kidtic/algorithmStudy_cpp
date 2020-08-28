@@ -1,0 +1,6 @@
+/home/kk/SynologyDrive/bigProject/algorithmStudy_cpp/build/CMakeFiles/edit_cache.dir
+/home/kk/SynologyDrive/bigProject/algorithmStudy_cpp/build/CMakeFiles/sort.dir
+/home/kk/SynologyDrive/bigProject/algorithmStudy_cpp/build/CMakeFiles/rebuild_cache.dir
+/home/kk/SynologyDrive/bigProject/algorithmStudy_cpp/build/CMakeFiles/pathplanning.dir
+/home/kk/SynologyDrive/bigProject/algorithmStudy_cpp/build/CMakeFiles/jsondata.dir
+/home/kk/SynologyDrive/bigProject/algorithmStudy_cpp/build/CMakeFiles/steelbar_cut.dir
