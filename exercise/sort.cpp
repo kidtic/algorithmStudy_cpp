@@ -44,20 +44,28 @@ public:
         vector<int> res2=guibingsort(nums2,0,nums2.size()-1);
         end = clock();
         double seconds  =(double)(end - start)/CLOCKS_PER_SEC;
-        printf("归并排序 Use time is: %.8f ms\n", seconds*1000);
+        printf("归并排序 Use time is: %.3f ms\n", seconds*1000);
 
         start = clock();
         res2=maopaosort(nums2);
         end = clock();
         seconds  =(double)(end - start)/CLOCKS_PER_SEC;
-        printf("冒泡排序 Use time is: %.8f ms\n", seconds*1000);
+        printf("冒泡排序 Use time is: %.3f ms\n", seconds*1000);
 
         res2=nums2;
         start = clock();
         quicksort(0,res2.size()-1,res2);
         end = clock();
         seconds  =(double)(end - start)/CLOCKS_PER_SEC;
-        printf("快速排序 Use time is: %.8f ms\n", seconds*1000);
+        printf("快速排序 Use time is: %.3f ms\n", seconds*1000);
+
+        start = clock();
+        res2=heapsort(nums2);
+        end = clock();
+        seconds  =(double)(end - start)/CLOCKS_PER_SEC;
+        printf("堆排序 Use time is: %.3f ms\n", seconds*1000);
+        
+
 
         cout<<"----------------函数库-------------------"<<endl;
         res2=nums2;
@@ -65,7 +73,7 @@ public:
         sort(res2.begin(),res2.end());
         end = clock();
         seconds  =(double)(end - start)/CLOCKS_PER_SEC;
-        printf("函数库:快速排序 Use time is: %.8f ms\n", seconds*1000);
+        printf("函数库:快速排序 Use time is: %.3f ms\n", seconds*1000);
 
         
         
@@ -157,6 +165,38 @@ public:
 		quicksort(i + 1, r, arr);
 	} 
 
+    //桶排序
+    vector<int> heapsort(vector<int> arr){
+        int len=arr.size();
+        //建立最大堆
+        for(int i=len/2;i>=0;i--){
+            heapify(arr,i,len);
+        }
+
+        //交换头尾，并且重新维护堆
+        for(int i=len-1;i>0;i--){
+            int tmp=arr[0];
+            arr[0]=arr[i];arr[i]=tmp;
+            len--;
+            heapify(arr,0,len);
+        }
+        return arr;
+    }
+    //桶排序维护函数，维护根结点为i的堆
+    void heapify(vector<int>& arr, int i,int len){
+        int left=2*i+1;
+        int right=2*i+2;
+        int bigindex=i;
+        if(left<len && arr[left]>arr[bigindex])bigindex=left;
+        if(right<len && arr[right]>arr[bigindex])bigindex=right;
+        if(bigindex!=i){
+            int tmp=arr[i];
+            arr[i]=arr[bigindex];arr[bigindex]=tmp;
+            //这时bigindex指向的是被换下来的数字，
+            //这个数字有可能很小，所以要继续往下比较。
+            heapify(arr,bigindex,len);
+        }
+    }
 };
 
 int main(int argc, char const *argv[])
