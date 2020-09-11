@@ -1,5 +1,10 @@
 {
     "files.associations": {
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "functional": "cpp",
+        "vector": "cpp",
+        "thread": "cpp",
+        "condition_variable": "cpp",
+        "iostream": "cpp"
     }
 }

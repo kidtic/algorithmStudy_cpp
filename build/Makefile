@@ -111,6 +111,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named threadsort
+
+# Build rule for target.
+threadsort: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 threadsort
+.PHONY : threadsort
+
+# fast build rule for target.
+threadsort/fast:
+	$(MAKE) -f CMakeFiles/threadsort.dir/build.make CMakeFiles/threadsort.dir/build
+.PHONY : threadsort/fast
+
+#=============================================================================
 # Target rules for targets named sort
 
 # Build rule for target.
@@ -270,6 +283,33 @@ exercise/steelbar_cut.cpp.s:
 	$(MAKE) -f CMakeFiles/steelbar_cut.dir/build.make CMakeFiles/steelbar_cut.dir/exercise/steelbar_cut.cpp.s
 .PHONY : exercise/steelbar_cut.cpp.s
 
+exercise/threadsort.o: exercise/threadsort.cpp.o
+
+.PHONY : exercise/threadsort.o
+
+# target to build an object file
+exercise/threadsort.cpp.o:
+	$(MAKE) -f CMakeFiles/threadsort.dir/build.make CMakeFiles/threadsort.dir/exercise/threadsort.cpp.o
+.PHONY : exercise/threadsort.cpp.o
+
+exercise/threadsort.i: exercise/threadsort.cpp.i
+
+.PHONY : exercise/threadsort.i
+
+# target to preprocess a source file
+exercise/threadsort.cpp.i:
+	$(MAKE) -f CMakeFiles/threadsort.dir/build.make CMakeFiles/threadsort.dir/exercise/threadsort.cpp.i
+.PHONY : exercise/threadsort.cpp.i
+
+exercise/threadsort.s: exercise/threadsort.cpp.s
+
+.PHONY : exercise/threadsort.s
+
+# target to generate assembly for a file
+exercise/threadsort.cpp.s:
+	$(MAKE) -f CMakeFiles/threadsort.dir/build.make CMakeFiles/threadsort.dir/exercise/threadsort.cpp.s
+.PHONY : exercise/threadsort.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -277,6 +317,7 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... edit_cache"
+	@echo "... threadsort"
 	@echo "... sort"
 	@echo "... rebuild_cache"
 	@echo "... pathplanning"
@@ -294,6 +335,9 @@ help:
 	@echo "... exercise/steelbar_cut.o"
 	@echo "... exercise/steelbar_cut.i"
 	@echo "... exercise/steelbar_cut.s"
+	@echo "... exercise/threadsort.o"
+	@echo "... exercise/threadsort.i"
+	@echo "... exercise/threadsort.s"
 .PHONY : help
 
 

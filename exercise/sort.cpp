@@ -36,7 +36,12 @@ public:
         vector<int> nums1=data.data_int_arr1[0];
         vector<int> nums2=data.data_int_arr1[1];
 
-        
+        vector<int> nums3;
+        srand((int)time(0));
+        for(int i=0;i<nums2.size();i++){
+            nums3.push_back(rand()%10000000);
+        }
+        vector<int> res3;
         
         
 
@@ -48,23 +53,27 @@ public:
         printf("归并排序 Use time is: %.3f ms\n", seconds*1000);
         if(!sortright(res2))cout<<"排序错误"<<endl;
 
+/*
         start = clock();
         res2=maopaosort(nums2);
         end = clock();
         seconds  =(double)(end - start)/CLOCKS_PER_SEC;
         printf("冒泡排序 Use time is: %.3f ms\n", seconds*1000);
         if(!sortright(res2))cout<<"排序错误"<<endl;
-
-        res2=nums2;
+*/
+        res2=nums2;res3=nums3;
         start = clock();
         quicksort(0,res2.size()-1,res2);
+        quicksort(0,res3.size()-1,res3);
         end = clock();
         seconds  =(double)(end - start)/CLOCKS_PER_SEC;
         printf("快速排序 Use time is: %.3f ms\n", seconds*1000);
         if(!sortright(res2))cout<<"排序错误"<<endl;
+        if(!sortright(res3))cout<<"排序错误"<<endl;
 
         start = clock();
         res2=heapsort(nums2);
+        res3=heapsort(nums3);
         end = clock();
         seconds  =(double)(end - start)/CLOCKS_PER_SEC;
         printf("堆排序 Use time is: %.3f ms\n", seconds*1000);
@@ -72,6 +81,7 @@ public:
 
         start = clock();
         res2=shellsort(nums2);
+        res3=shellsort(nums3);
         end = clock();
         seconds  =(double)(end - start)/CLOCKS_PER_SEC;
         printf("希尔排序 Use time is: %.3f ms\n", seconds*1000);
@@ -79,25 +89,36 @@ public:
 
         start = clock();
         res2=insertsort(nums2);
+        res3=insertsort(nums3);
         end = clock();
         seconds  =(double)(end - start)/CLOCKS_PER_SEC;
         printf("插入排序 Use time is: %.3f ms\n", seconds*1000);
+        if(!sortright(res2))cout<<"排序错误"<<endl;
+
+        start = clock();
+        res2=bucketsort(nums2,100);
+        res3=bucketsort(nums3,100);
+        end = clock();
+        seconds  =(double)(end - start)/CLOCKS_PER_SEC;
+        printf("桶排序 Use time is: %.3f ms\n", seconds*1000);
         if(!sortright(res2))cout<<"排序错误"<<endl;
 
         
 
 
         cout<<"----------------函数库-------------------"<<endl;
-        res2=nums2;
+        res2=nums2;res3=nums3;
         start = clock();
         sort(res2.begin(),res2.end());
+        sort(res3.begin(),res3.end());
         end = clock();
         seconds  =(double)(end - start)/CLOCKS_PER_SEC;
         printf("函数库:快速排序 Use time is: %.3f ms\n", seconds*1000);
 
-        res2=nums2;
+        res2=nums2;res3=nums3;
         start = clock();
         stable_sort(res2.begin(),res2.end());
+        stable_sort(res3.begin(),res3.end());
         end = clock();
         seconds  =(double)(end - start)/CLOCKS_PER_SEC;
         printf("函数库:稳定排序 Use time is: %.3f ms\n", seconds*1000);
@@ -111,22 +132,13 @@ public:
         
     };
     vector<int> guibingsort(vector<int>& nums,int left,int right){
-        if(left>right||left<0||right>=nums.size()){
-            vector<int> res;
-            return res;
-        }
         
         if(left==right){
             vector<int> res;
             res.push_back(nums[left]);
             return res;
         }
-        if(right-left==1){
-            vector<int> res;
-            res.push_back(min(nums[left],nums[right]));
-            res.push_back(max(nums[left],nums[right]));
-            return res;
-        }
+        
         int mid=(left+right)/2;
         vector<int> a=guibingsort(nums,left,mid);
         vector<int> b=guibingsort(nums,mid+1,right);
@@ -259,6 +271,38 @@ public:
         }
         return arr;
     }
+    //桶排序
+    vector<int> bucketsort(vector<int> arr,int buckSize){
+        if(arr.size()==0)return arr;
+        int minval=arr[0];
+        int maxval=arr[0];
+        for(int val:arr){
+            if(val<minval)minval=val;
+            else if(val>maxval)maxval=val;
+        }
+        //准备多少个桶子
+        int bucketCount=(maxval-minval)/buckSize+1;
+        vector<vector<int>> buckets(bucketCount);
+
+        //把所有数映射到桶中
+        for(int e:arr){
+            int index=(e-minval)/buckSize;
+            buckets[index].push_back(e);
+        }
+
+        //对桶中元素进行排序，并安排回arr
+        int arri=0;
+        for(auto buck:buckets){
+            if(buck.size()==0)continue;
+            buck=insertsort(buck);
+            for(int e:buck){
+                arr[arri++]=e;
+            }
+        }
+
+        return arr;
+        
+    }
 
 };
 
@@ -268,6 +312,8 @@ int main(int argc, char const *argv[])
     mysort out;
 
     out.Solution();
+
+   
     
     
     return 0;

@@ -4,7 +4,7 @@ project(algorithmstudy)
 # 添加cmake模块以使用g2o
 
 IF(NOT CMAKE_BUILD_TYPE)
-  SET(CMAKE_BUILD_TYPE Release)
+  SET(CMAKE_BUILD_TYPE Debug)
 ENDIF()
 
 MESSAGE("Build type: " ${CMAKE_BUILD_TYPE})
@@ -63,6 +63,9 @@ target_link_libraries(pathplanning libjsoncpp.a)
 #排序
 add_executable(sort exercise/sort.cpp)
 target_link_libraries(sort libjsoncpp.a)
+#多线程排序
+add_executable(threadsort exercise/threadsort.cpp)
+target_link_libraries(threadsort libjsoncpp.a pthread)
 
 
 
